@@ -4,10 +4,16 @@ var getDeviceAddress = require('../helpers/get-device-address.js')
 var formatDeviceAddressRequest = require('../helpers/format-device-address-request.js')
 
 function FindIntent () {
+  const ALL_ADDRESS_PERMISSION = 'read::alexa:device:all:address'
+  const PERMISSIONS = [ALL_ADDRESS_PERMISSION]
   var me = this
+  console.log(JSON.stringify(this))
   var deviceId = this.event.context.System.device.deviceId
-  var consentToken = this.event.context.System.user.permissions.consentToken
+  console.log(deviceId)
+  var consentToken = this.event.context.System.apiAccessToken
+  console.log(consentToken)
   var term = this.event.request.intent.slots.typeOfRestuarant.value
+  console.log(term)
   if (deviceId === undefined || consentToken === undefined) {
     var askForPermissions = 'Please enable Location permissions in the Amazon Alexa app'
     me.emit(':tellWithPermissionCard', askForPermissions, PERMISSIONS)
@@ -17,9 +23,9 @@ function FindIntent () {
       if (err) {
         me.emit(':tell', err)
       }
-      handler.state = res.state
-      console.log(res.state)
-      me.emit(':ask', res, res)
+      console.log(res)
+      me.attributes['restuarantIds'] = res.data
+      me.emit(':ask', res.result, res.result)
     })
   }
 }

@@ -16,6 +16,8 @@ function getDeviceAddress (url, consentToken, term, callback) {
       Authorization: 'Bearer ' + consentToken
     }
   }
+  console.log(urlOptions)
+
 
   got(url, urlOptions)
     .then(response => {
@@ -24,6 +26,7 @@ function getDeviceAddress (url, consentToken, term, callback) {
         if (err) {
           callback(err)
         }
+        console.log(res)
         callback(null, res)
       })
     })

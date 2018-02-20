@@ -3,7 +3,7 @@
 const yelp = require('yelp-fusion');
 
 require('dotenv').config()
-const apiKey = process.env.APIKEY;
+const apiKey = process.env.API_KEY;
 // const searchRequest = {
 //   term:'',
 //   location: ''
@@ -11,25 +11,37 @@ const apiKey = process.env.APIKEY;
 
 const client = yelp.client(apiKey);
 
-var restCall =(data,callback) =>{
-    client.search(data).then(response => {
-      const data = response.jsonBody.businesses;
-      var result = formatOutput(data);
+var restCall = (searchRequest,callback) =>{
+    console.log(searchRequest)
+    client.search(searchRequest).then(response => {
+      const businessInfo = response.jsonBody.businesses;
+      var result = formatOutput(searchRequest, businessInfo);
       callback(null,result)
     }).catch(e => {
       // console.log(e);
+      console.log(e)
       callback(e,null);
     });
 }
-var formatOutput = (data) => {
-    var result = ''
+var formatOutput = (searchRequest, businessInfo) => {
+    var restuarants = []
+    var output = {
+      data: restuarants,
+      result: result
+    }
+    var result = 'Here are your ' + searchRequest.term + ' restuarant recommendations: <break time="1s"/>'
     var i = 0
-    data.forEach(element =>{
+    businessInfo.forEach(element =>{
         if ( i < 4 ) {
+            restuarants.push(element.id)
             result = result + ' You have ' + element.name + ' <break time="1s"/> ' + 'It has a rating of ' + element.rating + ' <break time="1s"/> ' + 'It is located at ' + element.location.address1 + ',' + element.location.city + ' <break time="1s"/> '
             i = i + 1 ;
         }
     })
-    return result
+    var output = {
+      data: restuarants,
+      result: result
+    }
+    return output
 }
 module.exports.restCall = restCall;

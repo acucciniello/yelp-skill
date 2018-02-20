@@ -11,5 +11,6 @@ function formatDeviceAddressRequest (deviceId) {
   var endOfURL = '/settings/address'
   var urlWithDevice = baseURL + deviceId
   var finalURL = urlWithDevice + endOfURL
+  console.log(finalURL)
   return finalURL
 }
