@@ -44,4 +44,22 @@ var formatOutput = (searchRequest, businessInfo) => {
     }
     return output
 }
+
+var restCallForReview =(restrauntID,callback) =>{
+    var reviewText = 'Here are some reviews  <break time="1s"/> '
+    var i = 0
+    client.reviews(restrauntID).then(response => {
+        response.jsonBody.reviews.forEach(element =>{
+            reviewText = reviewText + response.jsonBody.reviews[i].text + '<break time="1s"/> '+ 'Next Review' + '<break time="1s"/> '
+            i = i + 1
+            // console.log(reviewText)
+        })
+        reviewText = reviewText + 'Please go the Yelp website for complete reviews'
+        callback(null,reviewText)
+    }).catch(e => {
+        callback(e)
+    });
+
+}
 module.exports.restCall = restCall;
+module.export.restCallForReview = restCallForReview;
