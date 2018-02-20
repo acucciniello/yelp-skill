@@ -45,7 +45,7 @@ var formatOutput = (searchRequest, businessInfo) => {
     return output
 }
 
-var restCallForReview =(restrauntID,callback) =>{
+var restCallForReview = (restrauntID,callback) =>{
     var reviewText = 'Here are some reviews  <break time="1s"/> '
     var i = 0
     client.reviews(restrauntID).then(response => {
@@ -62,4 +62,4 @@ var restCallForReview =(restrauntID,callback) =>{
 
 }
 module.exports.restCall = restCall;
-module.export.restCallForReview = restCallForReview;
+module.exports.restCallForReview = restCallForReview;
