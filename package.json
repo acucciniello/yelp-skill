@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "dotenv": "^5.0.0",
+    "yelp-fusion": "^2.0.3"
+  }
+}
