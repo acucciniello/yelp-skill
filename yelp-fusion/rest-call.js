@@ -26,10 +26,10 @@ var formatOutput = (data) => {
     var i = 0
     data.forEach(element =>{
         if ( i < 4 ) {
-            result = result + 'You have ' + element.name + '<break time="1s"/>' + 'It has a rating of ' + element.rating + '<break time="1s"/>' + 'It is located ' + element.location.address1 + ',' + element.location.city
+            result = result + ' You have ' + element.name + ' <break time="1s"/> ' + 'It has a rating of ' + element.rating + ' <break time="1s"/> ' + 'It is located at ' + element.location.address1 + ',' + element.location.city + ' <break time="1s"/> '
             i = i + 1 ;
         }
     })
-    return data
+    return result
 }
 module.exports.restCall = restCall;
