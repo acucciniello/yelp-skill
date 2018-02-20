@@ -2,7 +2,6 @@
 // Purpose: To create a response from the format device address request
 module.exports = formatDeviceAddressResponse
 
-var getLatLong = require('./get-lat-long.js')
 var restcall = require('../yelp-fusion/rest-call.js')
 
 // Purpose: To create a response from the format device address request
