@@ -1,0 +1,7 @@
+{
+  "lambda": {
+    "role": "yelp-skill-executor",
+    "name": "yelp-skill",
+    "region": "us-east-1"
+  }
+}

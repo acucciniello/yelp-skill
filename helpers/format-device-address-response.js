@@ -8,7 +8,7 @@ var restcall = require('../yelp-fusion/rest-call.js')
 // param(in): parsedResponse: the parsed response from the Device Address API
 // param(out): callback: returns the formatted response or error to the previous function
 // calledBy: getCourseSummaries()
-function formatDeviceAddressResponse (parsedResponse, callback) {
+function formatDeviceAddressResponse (parsedResponse, term, callback) {
   var stateOrRegion = parsedResponse.stateOrRegion
   var addressLine = parsedResponse.addressLine1
   var postalCode = parsedResponse.postalCode
@@ -24,7 +24,11 @@ function formatDeviceAddressResponse (parsedResponse, callback) {
     'app.  You could go to your settings, and edit the device location with your current location.' +
     callback(nullResponses)
   } else {
-    restcall(term, postalCode, function (res, err) {
+    const searchRequest = {
+       term: term,
+       location: postalCode
+    }
+    restcall(searchRequest, function (res, err) {
       if (err) {
         console.log(err)
         callback(err)

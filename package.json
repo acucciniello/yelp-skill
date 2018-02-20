@@ -4,5 +4,14 @@
     "dotenv": "^5.0.0",
     "got": "^8.2.0",
     "yelp-fusion": "^2.0.3"
-  }
+  },
+  "scripts": {
+    "deploy": "claudia create --region us-east-1 --handler index.handler --profile claudia",
+    "upload": "claudia update --profile claudia"
+  },
+  "name": "yelp-skill",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/acucciniello/yelp-skill.git",
+  "license": "MIT"
 }
